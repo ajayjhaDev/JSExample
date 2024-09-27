@@ -1,3 +1,6 @@
+// <!---------------------------------------------------------------------------->
+// diff arrow function and normal function
+
 // Hoisting can’t be achieved by using arrow function
 // A normal function can be called from anywhere means we can call a normal function before initialization
 // and after initialization without any error.
@@ -20,3 +23,33 @@ const add = (num1, num2) => {
 };
 
 console.log(add(2, 3)); // 5
+
+// <!---------------------------------------------------------------------------->
+// Closure
+
+function foo(a) {
+  let x = a + 10;
+
+  return function () {
+    return 5 + x;
+  };
+}
+
+let t = foo(6);
+
+let total = t();
+
+console.log(total);
+
+// <!----------------------------------------------------------------------------->
+// Currying
+
+function sum(a) {
+  return function (b) {
+    return function (c) {
+      return a + b + c;
+    };
+  };
+}
+
+console.log(sum(1)(2)(3));
