@@ -53,3 +53,47 @@ function sum(a) {
 }
 
 console.log(sum(1)(2)(3));
+
+// <!------------------------------------------------------------------------------->
+// call, apply and bind
+
+function introduce(city) {
+  console.log(`Hi, my name is ${this.name}. I live in ${city}. `);
+}
+
+let hero = {
+  name: "Spiderman",
+};
+
+introduce.call(hero, "New York");
+introduce.apply(hero, ["New York"]);
+// .call() and .apply() are immediately executed
+
+let intro = introduce.bind(hero, "New York");
+intro();
+// new function (intro) is created with 'this' binded
+// to hero object. This function can be later executed.
+
+// <!----------------------------------------------------------------------------------->
+// Shallow Copy vs Deep Copy
+
+const original = { name: "John", address: { city: "New York" } };
+
+// Shallow copy using Object.assign() or spread operator
+const shallowCopy = { ...original };
+
+// Modifying the nested object in the shallow copy
+shallowCopy.address.city = "Los Angeles";
+
+console.log(original.address.city); // Output: "Los Angeles" (both objects share the same nested reference)
+
+// deep copy
+const originalDeep = { name: "John", address: { city: "New York" } };
+
+// Deep copy using JSON methods (works well for simple objects)
+const deepCopy = JSON.parse(JSON.stringify(originalDeep));
+
+// Modifying the nested object in the deep copy
+deepCopy.address.city = "Los Angeles";
+
+console.log(originalDeep.address.city); // Output: "New York" (deep copy does not affect the original)
